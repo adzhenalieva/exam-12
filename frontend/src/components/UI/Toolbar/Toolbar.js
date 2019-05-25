@@ -15,15 +15,13 @@ const Toolbar = ({user, logout}) => {
         <Navbar color="light" light expand="md">
             <NavbarBrand tag={RouterNavLink} to="/">Photo Gallery</NavbarBrand>
             <Nav className="ml-auto" navbar>
-                <NavItem>
-                    <NavLink tag={RouterNavLink} to="/" exact>Photos</NavLink>
-                </NavItem>
                 {user ?
-                    <NavItem>
+                    <NavItem className="pt-3">
                         <NavLink tag={RouterNavLink} to="/photos/new" exact>Add new photo</NavLink>
                     </NavItem> : null
                 }
                 {user ? <UserMenu user={user} logout={logout}/> : <AnonimousMenu/>}
+
             </Nav>
         </Navbar>
     );
