@@ -52,10 +52,18 @@ router.get('/:id', (req, res) => {
 
 
 router.post('/', auth, upload.single('image'), async (req, res) => {
+let image;
+if(req.file){
+    image = req.file.filename
+} else{
+    image = null;
+}
     const photo = await new Photo({
         user: req.user._id,
-        image: req.file.filename
+        image,
+        title: req.body.title
     });
+
     photo.save()
         .then(result => res.send(result))
         .catch(error => res.status(400).send(error));
