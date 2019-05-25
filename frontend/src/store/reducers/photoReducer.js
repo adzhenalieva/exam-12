@@ -3,13 +3,13 @@ import {
     FETCH_PHOTO_BY_ID_SUCCESS,
     FETCH_PHOTO_FAILURE,
     FETCH_PHOTO_SUCCESS,
-    SEND_PHOTO_FAILURE
+    SEND_PHOTO_FAILURE, SEND_PHOTO_SUCCESS
 } from "../actions/photoActions";
 
 
 const initialState = {
     photos: [],
-    photoById: [],
+    photoById: null,
     show: false,
     error: null
 };
@@ -19,7 +19,8 @@ const photoReducer = (state = initialState, action) => {
         case FETCH_PHOTO_SUCCESS:
             return {
                 ...state,
-                photos: action.data
+                photos: action.data,
+                error: null
             };
         case FETCH_PHOTO_BY_ID_SUCCESS:
             return {
@@ -31,6 +32,11 @@ const photoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: action.error
+            };
+        case SEND_PHOTO_SUCCESS:
+            return {
+                ...state,
+                error: null,
             };
         case FETCH_PHOTO_FAILURE:
             return {

@@ -11,7 +11,7 @@ const PhotoList = props => {
                 <CardText><strong>
                    Title {props.title}
                 </strong></CardText>
-                <CardText onClick={props.clickAuthor}>By: {props.user}</CardText>
+                <CardText style = {{color: "blue", textDecoration: "underline"}} onClick={props.clickAuthor}>{props.user}</CardText>
             </CardBody>
             {props.children}
         </Card>

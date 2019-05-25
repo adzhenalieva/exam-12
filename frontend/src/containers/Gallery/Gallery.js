@@ -22,33 +22,38 @@ class Gallery extends Component {
             pathname: '/photos/' + id
         })
     };
+
     render() {
         return (
             <Fragment>
                 <h1 className="mb-3">
-                   Welcome to free stock photos gallery
+                    Welcome to free stock photos gallery
                 </h1>
                 <CardColumns>
                     {this.props.photos.map(photo => (
-                                <PhotoList
-                                    key={photo._id}
-                                    title={photo.title}
-                                    image={photo.image}
-                                    user={photo.user.displayName}
-                                    click={() => this.fetchPhotoById(photo._id)}
-                                    clickAuthor={() => this.goToAuthorsGallery(photo.user._id)}
-                                />
-                            ))}
+                        <PhotoList
+                            key={photo._id}
+                            title={photo.title}
+                            image={photo.image}
+                            user={"By " + photo.user.displayName}
+                            click={() => this.fetchPhotoById(photo._id)}
+                            clickAuthor={() => this.goToAuthorsGallery(photo.user._id)}
+                        />
+                    ))}
                 </CardColumns>
                 <Modal show={this.props.show}
                        close={this.props.closeModal}
-                       >
-                    <img style={{width: "60%", height: 600, marginLeft: 200}} src={apiURL + '/uploads/photos/' + this.props.photoById.image} alt="singlePhoto"/>
+                >
+                    {this.props.photoById ?
+                        <img style={{width: "60%", height: 600, marginLeft: 200}}
+                             src={apiURL + '/uploads/photos/' + this.props.photoById.image} alt="singlePhoto"/>
+                        : null}
                 </Modal>
             </Fragment>
         );
     }
 }
+
 const mapStateToProps = state => {
     return {
         photos: state.photos.photos,

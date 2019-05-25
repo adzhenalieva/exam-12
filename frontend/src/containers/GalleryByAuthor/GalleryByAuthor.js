@@ -16,6 +16,7 @@ class GalleryByAuthor extends Component {
     fetchPhotoById = id => {
         this.props.fetchPhotoById(id);
     };
+
     deletePhoto = id => {
         this.props.deletePhoto(id).then(
             () => {
@@ -24,33 +25,46 @@ class GalleryByAuthor extends Component {
         )
     };
 
+    goToAddForm = () => {
+        this.props.history.push({
+            pathname: '/photos/new'
+        })
+    };
+
     render() {
+        let addButton;
         let button = () => {
             //
         };
         if (this.props.user && this.props.user._id === this.props.match.params.id) {
+            addButton = <Button color="primary" className="m-3" onClick={this.goToAddForm}>Add new photo</Button>;
+
             button = (id) => {
                 return <Fragment>
-                    <Button className="m-3" onClick={() => this.deletePhoto(id)}>Delete</Button>
+                    <Button color="primary" className="m-3" onClick={() => this.deletePhoto(id)}>Delete</Button>
                 </Fragment>
-            }
+            };
         } else {
+            addButton = null;
+
             button = () => {
                 //
             };
         }
         return (
             <Fragment>
-                <h1 className="mb-3">
-                    Gallery by
-                </h1>
+                {this.props.photos.length > 0 ?
+                    <h1 className="mb-3">
+                        Gallery by {this.props.photos[0].user.displayName}
+                    </h1>
+                    : <h1>Gallery </h1>}
+                {addButton}
                 <CardColumns>
                     {this.props.photos.map(photo => (
                         <PhotoList
                             key={photo._id}
                             title={photo.title}
                             image={photo.image}
-                            user={photo.user.displayName}
                             click={() => this.fetchPhotoById(photo._id)}
                         >
                             {button(photo._id)}
@@ -60,8 +74,10 @@ class GalleryByAuthor extends Component {
                 <Modal show={this.props.show}
                        close={this.props.closeModal}
                 >
-                    <img style={{width: "60%", height: 600, marginLeft: 200}}
-                         src={apiURL + '/uploads/photos/' + this.props.photoById.image} alt="singlePhoto"/>
+                    {this.props.photoById ?
+                        <img style={{width: "60%", height: 600, marginLeft: 200}}
+                             src={apiURL + '/uploads/photos/' + this.props.photoById.image} alt="singlePhoto"/>
+                        : null}
                 </Modal>
             </Fragment>
         );

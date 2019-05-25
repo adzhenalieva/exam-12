@@ -1,7 +1,6 @@
 import React from 'react';
 import {apiURL} from "../../../../constants";
-import {DropdownItem, DropdownMenu, DropdownToggle, NavLink, UncontrolledDropdown} from "reactstrap";
-import {NavLink as RouterNavLink} from "react-router-dom";
+import {DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from "reactstrap";
 
 const UserMenu = ({user, logout}) => (
     <UncontrolledDropdown nav inNavbar>
@@ -13,12 +12,6 @@ const UserMenu = ({user, logout}) => (
             Hello, {user.displayName}
         </DropdownToggle>
         <DropdownMenu right>
-
-            {/*<DropdownItem>*/}
-            {/*    <NavLink tag={RouterNavLink} to="/tracks/new" exact>Add new track</NavLink>*/}
-            {/*</DropdownItem>*/}
-
-            <DropdownItem divider/>
             <DropdownItem className="ml-2" onClick={logout}>
                 Log out
             </DropdownItem>
