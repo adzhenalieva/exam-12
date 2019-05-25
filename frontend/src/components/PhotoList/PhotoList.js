@@ -5,15 +5,15 @@ import {apiURL} from "../../constants";
 
 const PhotoList = props => {
     return (
-        <Card className="mb-5" onClick={props.click}>
+        <Card className="mb-5" >
             <CardBody>
-                <CardImg top width="100%" className="mb-3" src={apiURL + '/uploads/photos/' + props.image} alt="photoGallery"/>
+                <CardImg onClick={props.click} top width="100%" className="mb-3" src={apiURL + '/uploads/photos/' + props.image} alt="photoGallery"/>
                 <CardText><strong>
                    Title {props.title}
                 </strong></CardText>
-                <CardText>By: {props.user}</CardText>
-
+                <CardText onClick={props.clickAuthor}>By: {props.user}</CardText>
             </CardBody>
+            {props.children}
         </Card>
     );
 };

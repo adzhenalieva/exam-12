@@ -1,4 +1,5 @@
 import {
+    CLOSE_MODAL,
     FETCH_PHOTO_BY_ID_SUCCESS,
     FETCH_PHOTO_FAILURE,
     FETCH_PHOTO_SUCCESS,
@@ -9,6 +10,7 @@ import {
 const initialState = {
     photos: [],
     photoById: [],
+    show: false,
     error: null
 };
 
@@ -22,6 +24,7 @@ const photoReducer = (state = initialState, action) => {
         case FETCH_PHOTO_BY_ID_SUCCESS:
             return {
                 ...state,
+                show: true,
                 photoById: action.data
             };
         case SEND_PHOTO_FAILURE:
@@ -33,6 +36,11 @@ const photoReducer = (state = initialState, action) => {
             return {
                 ...state,
                 error: action.error
+            };
+        case CLOSE_MODAL:
+            return {
+                ...state,
+                show: false
             };
         default:
             return state;
