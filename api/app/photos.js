@@ -24,9 +24,8 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
     let criteria = {};
-
-    if (req.user) {
-        criteria = {user: req.user._id}
+    if (req.query.user) {
+        criteria = {user: req.query.user}
     }
 
     Photo.find(criteria).populate({
@@ -63,19 +62,17 @@ router.post('/', auth, upload.single('image'), async (req, res) => {
 });
 
 
+router.delete('/:id', auth, async (req, res) => {
+    const photo = await Photo.findById(req.params.id);
+    if (photo.user.equals(req.user._id)) {
+        Photo.deleteOne({_id: req.params.id}).then(
+            result => res.send(result)
+        )
+    } else {
+        res.sendStatus(403)
+    }
 
-router.delete('/:id/delete', auth, async (req, res) => {
-   const photo =  await Photo.findById(req.params.id);
-   if(photo.user.isEqualNode(req.user._id) ){
-       Photo.deleteOne({_id: req.params.id}).then(
-           result => res.send(result)
-       )
-   } else{
-       res.sendStatus(403)
-   }
 
-
-    res.send('success');
 });
 
 
