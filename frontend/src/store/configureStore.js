@@ -5,6 +5,7 @@ import thunkMiddleware from "redux-thunk";
 
 import axios from '../axios-api';
 import usersReducer from "./reducers/usersReducer";
+import photoReducer from"./reducers/photoReducer";
 import {loadFromLocalStorage, saveToLocalStorage} from "./LocalStorage";
 
 export const history = createBrowserHistory();
@@ -13,6 +14,7 @@ export const history = createBrowserHistory();
 
 const rootReducer = combineReducers({
     users: usersReducer,
+    photos: photoReducer,
     router: connectRouter(history)
 });
 
