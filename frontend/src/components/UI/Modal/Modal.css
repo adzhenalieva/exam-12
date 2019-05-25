@@ -24,3 +24,8 @@
         left: calc(50% - 550px);
     }
 }
+.GalleryImage {
+    width: 60%;
+    height: 600px;
+    margin-left: 200px;
+}

@@ -1,13 +1,14 @@
 import React from 'react';
 import {apiURL} from "../../../../constants";
 import {DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown} from "reactstrap";
+import './Menu.css';
 
 const UserMenu = ({user, logout}) => (
     <UncontrolledDropdown nav inNavbar>
         <DropdownToggle nav caret>
             {user.facebookId ?
-                <img src={user.avatar} alt="icon" style={{width: "60px", marginRight: 10,  marginLeft: 20}}/>
-                : <img src={apiURL + '/uploads/users/' + user.avatar} alt="icon" style={{width: "60px", marginRight: 10,  marginLeft: 20}}/>
+                <img className="Image" src={user.avatar} alt="icon"/>
+                : <img className="Image" src={apiURL + '/uploads/users/' + user.avatar} alt="icon"/>
             }
             Hello, {user.displayName}
         </DropdownToggle>

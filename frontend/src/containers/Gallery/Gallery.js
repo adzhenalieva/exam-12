@@ -5,7 +5,7 @@ import {CardColumns} from "reactstrap";
 import {closeModal, fetchPhotoById, fetchPhotos} from "../../store/actions/photoActions";
 import PhotoList from "../../components/PhotoList/PhotoList";
 import Modal from "../../components/UI/Modal/Modal";
-import {apiURL} from "../../constants";
+import {apiPhotos} from "../../constants";
 
 
 class Gallery extends Component {
@@ -45,8 +45,8 @@ class Gallery extends Component {
                        close={this.props.closeModal}
                 >
                     {this.props.photoById ?
-                        <img style={{width: "60%", height: 600, marginLeft: 200}}
-                             src={apiURL + '/uploads/photos/' + this.props.photoById.image} alt="singlePhoto"/>
+                        <img className="GalleryImage"
+                             src={apiPhotos + this.props.photoById.image} alt="singlePhoto"/>
                         : null}
                 </Modal>
             </Fragment>
